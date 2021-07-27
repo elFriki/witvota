@@ -1,0 +1,58 @@
+<td-layout>
+    <td-layout-nav logo="assets:covalent">
+        <div layout-gt-sm="row" tdMediaToggle="gt-xs">
+            <div flex-gt-sm>
+                <mat-card tdMediaToggle="gt-xs">
+                    <mat-card-title>Users</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <mat-list>
+                            <mat-list-item>
+                                <mat-icon matListAvatar>account_box</mat-icon>
+                                <h4 matLine>John Jameson</h4>
+                                <p matLine>john@gmail.com</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon matListAvatar>account_box</mat-icon>
+                                <h4 matLine>Jan Smith</h4>
+                                <p matLine>jan@gmail.com</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon matListAvatar>account_box</mat-icon>
+                                <h4 matLine>Richard Black</h4>
+                                <p matLine>rich@gmail.com</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon matListAvatar>account_box</mat-icon>
+                                <h4 matLine>Paul Jones</h4>
+                                <p matLine>paul@gmail.com</p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon matListAvatar>account_box</mat-icon>
+                                <h4 matLine>Sally Jackson</h4>
+                                <p matLine>sally@gmail.com</p>
+                            </mat-list-item>
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions>
+                        <button mat-button routerLink="/form" color="accent" class="text-upper">New</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+        <button routerLink="/form" class="mat-fab-bottom-right" mat-fab>
+        <mat-icon class="icon">add</mat-icon>
+      </button>
+        <td-layout-footer>
+            <div layout="row" layout-align="start center">
+                <span class="md-caption">Made with <mat-icon class="text-md">favorite</mat-icon> using <a href="http://getcovalent.com" class="text-nodecoration tc-blue-700">Covalent</a>, built on Angular v5 + Angular Material.</span>
+            </div>
+        </td-layout-footer>
+    </td-layout-nav>
+</td-layout>

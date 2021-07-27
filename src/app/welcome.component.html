@@ -1,0 +1,34 @@
+<div class="container" [ngStyle]="eventoFB?.imageUrl ? {'background-image': 'url(' + eventoFB?.imageUrl + ')'} : {'background-image': 'url(https://source.unsplash.com/random)'}">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="darkorange" type="pacman" [fullScreen]="true">
+        <p style="color: darkorange"> un momentito, por favor... </p>
+    </ngx-spinner>
+    <div class="modal">
+        <ng-container *ngIf="!(eventosFB | async); else second">
+            <h1>No hay ningún evento...</h1>
+        </ng-container>
+        <ng-template #second>
+            <ng-container *ngIf="!noHayEventos && !estamosEnDirecto; else third">
+                <!-- mat-selection-list #listaEventos [multiple]="false">
+                    <mat-list-option *ngIf="eventoFB">
+                        <img matListAvatar [src]='eventoFB.imageUrl' [alt]="eventoFB.name">
+                        <h3 matLine> {{ eventoFB.name }} </h3>
+                        <p matLine>
+                            <span>{{ eventoFB.description }} </span>
+                        </p>
+                        <p matLine>
+                            <span *ngFor="let item of data">
+                                {{ item.value }} <small>{{ item.name }}</small>
+                            </span>
+                        </p>
+                    </mat-list-option>
+                </mat-selection-list -->
+                <app-vota></app-vota>
+                <!-- app-gaugechart [data]="data" [showText]=false [max]=100></app-gaugechart -->
+            </ng-container>
+        </ng-template>
+        <ng-template #third>
+            <h1>{{ eventoFB.name }} en directo...</h1>
+        </ng-template>
+        <!-- p class="warning"><strong>This only works in the <a href="http://nightly.webkit.org/">Webkit Nightlies</a>!</strong></p -->
+    </div>
+</div>

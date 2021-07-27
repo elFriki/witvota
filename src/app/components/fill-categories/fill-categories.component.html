@@ -1,0 +1,22 @@
+<h1>Añade categorías votables a {{ eventoFB.name }}</h1>
+<mat-list>
+    <button mat-list-item *ngFor="let category of eventoFB.categories; let i = index" (click)="save(i)">
+        <mat-icon color="warn">remove</mat-icon>
+        <span>{{ i + 1 }} {{ category }}</span>
+    </button>
+
+    <mat-list-item *ngFor="let category of eventoFB.categories; let i = index" class="separateButtons">
+        <mat-action-list>
+            <button mat-list-item color="warn" (click)="save(i)"><mat-icon color="warn">remove</mat-icon></button>
+        </mat-action-list>
+        <mat-action-list>
+            <span>{{ i + 1 }} {{ category }}</span>
+        </mat-action-list>
+    </mat-list-item>
+</mat-list>
+<div class="separateButtons">
+    <mat-form-field appearance="outline">
+        <mat-label>Categoría</mat-label>
+        <input id="myCategory" matInput placeholder="Mi estupenda categoría">
+    </mat-form-field>
+</div>

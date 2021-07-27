@@ -1,0 +1,129 @@
+<div class="container" [ngStyle]="{'background-image': 'url(' + eventoFB?.imageUrl + ')'}">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="darkorange" type="pacman" [fullScreen]="true">
+        <p style="color: darkorange">{{ loadingText }}</p>
+    </ngx-spinner>
+    <div class="modal">
+        <form (ngSubmit)="guardarEvento( f )" #f="ngForm">
+            <mat-vertical-stepper #stepper>
+                <mat-step errorMessage="Hay que darle un nombre">
+                    <ng-template matStepLabel>{{ eventoFB?.name || 'Nombre del evento' }}</ng-template>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del evento</mat-label>
+                        <input matInput name="name" placeholder="Mi favuloso evento" required [(ngModel)]="eventoFB.name">
+                        <mat-icon matSuffix>badge</mat-icon>
+                    </mat-form-field>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step optional="true">
+                    <button mat-button matStepperPrevious type="button"><mat-icon>north</mat-icon></button>
+                    <ng-template matStepLabel>Descríbelo</ng-template>
+                    <div class="separateButtons">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Describe el evento</mat-label>
+                            <input matInput name="description" placeholder="De qué va mi evento" [(ngModel)]="eventoFB.description">
+                            <mat-icon matSuffix>filter</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Añade una foto del evento</mat-label>
+                            <input matInput name="imageUrl" placeholder="url de la foto" [(ngModel)]="eventoFB.imageUrl">
+                            <mat-icon matSuffix>local_see</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step optional="true">
+                    <button mat-button matStepperPrevious type="button"><mat-icon>north</mat-icon></button>
+                    <ng-template matStepLabel>Dónde y cuánto</ng-template>
+                    <div class="separateButtons">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Lugar del evento</mat-label>
+                            <input matInput name="place" placeholder="Dirección del evento" [(ngModel)]="eventoFB.place">
+                            <mat-icon matSuffix>place</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Precio</mat-label>
+                            <input matInput type="number" name="price" class="right" placeholder="La pasta que cuesta" [(ngModel)]="eventoFB.price">
+                            <mat-icon matSuffix>euro</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step optional="false" errorMessage="Se necesita fecha y hora de inicio y de fin del evento">
+                    <button mat-button matStepperPrevious type="button"><mat-icon>north</mat-icon></button>
+                    <ng-template matStepLabel>Cuándo</ng-template>
+                    <div class="separateButtons">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fecha y hora de inicio</mat-label>
+                            <input matInput type="datetime-local" name="iniDateTime" placeholder="Fecha y hora de inicio" required [ngModel]="eventoFB.iniDateTime | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="eventoFB.iniDateTime = dateChanged($event)">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fecha y hora de fin</mat-label>
+                            <input matInput type="datetime-local" name="endDateTime" placeholder="Fecha y hora de fin" required [ngModel]="eventoFB.endDateTime | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="eventoFB.endDateTime = dateChanged($event)">
+                        </mat-form-field>
+                    </div>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step optional="true">
+                    <div class="separateButtons">
+                        <button mat-button matStepperPrevious>
+                            <mat-icon>north</mat-icon>
+                        </button>
+                        <button mat-stroked-button color="primary" routerLink='/events/participantes/participante/new' routerLinkActive="active">
+                            <span>¿No lo encuntras? Añádelo</span>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <!-- button mat-stroked-button color="primary" (click)="dialog()">
+                            <span>Añade categorías votables</span>
+                            <mat-icon>add</mat-icon>
+                        </button -->
+                    </div>
+                    <ng-template matStepLabel>Quienes</ng-template>
+                    <mat-list *ngIf="eventoFB.participantes && participantes">
+                        <button mat-list-item *ngFor="let participante of participantes; let i = index" [ngStyle]="{'color': isInShow(participante) ? 'darkorange' : 'black'}" (click)="addRemove(participante)">
+                            <span *ngIf="isInShow(participante); then inShow; else notInShow"></span>
+                            <ng-template #inShow><mat-icon>remove</mat-icon></ng-template>
+                            <ng-template #notInShow><mat-icon>add</mat-icon></ng-template>
+                            <img class="selectImg" [src]="participante.imageUrl" [alt]="participante.name">
+                            {{ participante.name }}
+                        </button>
+                    </mat-list>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step optional="true">
+                    <button mat-button matStepperPrevious type="button"><mat-icon>north</mat-icon></button>
+                    <ng-template matStepLabel>Qué se puede votar</ng-template>
+                    <mat-list>
+                        <button mat-list-item *ngFor="let category of eventoFB.categories; let i = index" (click)="removeCategory(i, eventoFB.categories)">
+                            <mat-icon>remove</mat-icon>
+                            {{ category }}
+                        </button>
+                    </mat-list>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Categoría</mat-label>
+                        <input matInput name="category" placeholder="Añade una categoría" [(ngModel)]="category">
+                        <mat-icon matSuffix mat-button role="button" (click)="addCategory()">add</mat-icon>
+                    </mat-form-field>
+                    <button mat-button matStepperNext type="button"><mat-icon>south</mat-icon></button>
+                </mat-step>
+
+                <mat-step>
+                    <button mat-button matStepperPrevious type="button"><mat-icon>north</mat-icon></button>
+                    <ng-template matStepLabel>{{ eventoFB?.name || 'Evento'}} configurado</ng-template>
+                    <div class="right">
+                        <button mat-stroked-button color="primary" type="submit">
+                            <mat-icon>save</mat-icon>
+                        </button>
+                        <button mat-stroked-button color="warn" type="button" (click)="back()">
+                            <mat-icon>west</mat-icon>
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="darkorange" type="pacman" [fullScreen]="true">
+        <p style="color: darkorange"> un momentito, por favor... </p>
+    </ngx-spinner>
+    <div class="modal">
+        <mat-toolbar class="mat-elevation-z8">
+            <span *ngIf="!participantes">Prueba a añadir uno</span>
+            <span *ngIf="!listaParticipantes.selectedOptions.selected[0] && participantes"> Participantes </span>
+        </mat-toolbar>
+
+        <mat-selection-list #listaParticipantes [multiple]="false">
+            <mat-list-option *ngFor="let participante of participantes | async" (click)="mod(participante)">
+                <img matListAvatar [src]='participante.imageUrl' alt="...">
+                <h3 matLine> {{ participante.name }} </h3>
+                <p matLine>
+                    <span>{{ participante.description }} </span>
+                </p>
+            </mat-list-option>
+            <button routerLink="/events/participantes/participante/new" class="mat-fab-bottom-right flatButton" mat-fab>
+                <mat-icon class="icon">add</mat-icon>
+            </button>
+        </mat-selection-list>
+
+    </div>
+</div>

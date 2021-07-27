@@ -1,0 +1,23 @@
+<mat-selection-list #listaEventos [multiple]="false">
+    <mat-list-option *ngIf="evento">
+        <img matListAvatar [src]='evento.imageUrl' [alt]="evento.name">
+        <h3 matLine> Vota en {{ evento.name }} </h3>
+        <p matLine>
+            <span>{{ evento.description }} </span>
+        </p>
+    </mat-list-option>
+</mat-selection-list>
+<ng-container *ngIf="evento?.categories?.length === 0; else second">
+    <h1>¡Categoría única!</h1>
+    <mat-list *ngIf="evento?.participantes">
+        <button mat-list-item *ngFor="let participante of evento?.participantes; let i = index" (click)="vota(participante.id)">
+            <mat-icon>how_to_vote</mat-icon>
+            <img class="selectImg" [src]="getParticipante(participante.id)?.imageUrl" [alt]="getParticipante(participante.id)?.name">
+            {{ getParticipante(participante.id)?.name }}
+        </button>
+    </mat-list>
+    <app-gaugechart [data]="data" [showText]=true units="Votos" [max]=10></app-gaugechart>
+</ng-container>
+<ng-template #second>
+    <h1>¡{{ evento?.categories?.length }} categorías!</h1>
+</ng-template>

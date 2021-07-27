@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+}
+
+mat-toolbar {
+    background: #0C0C0C;
+    color: white;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-card {
+    background-color: transparent;
+}
+
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right {
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.md-button.md-fab {
+    line-height: 5.6rem;
+    min-width: 0;
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
+}
+
+.modal {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 5px;
+    color: #333;
+    font-family: sans-serif;
+    line-height: 1.5;
+    max-width: 90%;
+    min-width: 80%;
+    min-height: 50%;
+    padding: 0.3rem 0.3rem;
+    max-height: 98%;
+    overflow-y: auto;
+}
+
+.center {
+    text-align: center;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .modal {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    .container {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
+    .warning {
+        display: block;
+    }
+}
+
+.container {
+    background-image: url('https://source.unsplash.com/random');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.avatar {
+    margin-top: 16px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.selectImg {
+    width: 50px;
+    height: 50px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.flatButton {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+}

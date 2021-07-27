@@ -1,0 +1,45 @@
+<!-- ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="darkorange" type="pacman" [fullScreen]="true">
+    <p style="color: darkorange"> un momentito, por favor... </p>
+</ngx-spinner -->
+
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="modeOver" (click)="toggleNav()">
+        <mat-icon *ngIf="!isOpen">menu</mat-icon>
+        <mat-icon *ngIf="isOpen">close</mat-icon>
+    </button>
+    <span> {{ appTitle }} </span>
+    <span class="spacer"></span>
+    <span *ngIf="!isOpen">
+        <button mat-icon-button *ngFor="let enlace of enlacesTop" (aria-label)='enlace.span' [routerLink]='enlace.routerLink' routerLinkActive="active">
+            <mat-icon>{{ enlace.icon }}</mat-icon>
+        </button>
+    </span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" src="https://depor.com/resizer/YyRQGmliyl-FH3Y9lYuhF3dnb0I=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BWKOYV3S7NGN3P47D5H2QLYLUQ.jpg" routerLink="/" (click)="toggleNav()"
+        />
+
+        <h4 class="name">Valiente Smith</h4>
+        <p class="designation">El voluntario del público</p>
+
+        <mat-divider></mat-divider>
+        <button *ngFor="let enlace of enlacesTop" mat-button class="menu-button" [routerLink]='enlace.routerLink' routerLinkActive="active" (click)="toggleNav()">
+            <mat-icon>{{ enlace.icon }}</mat-icon>
+            <span>{{ enlace.span }}</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button *ngFor="let item of enlacesBottom" mat-button class="menu-button" [routerLink]='item.routerLink' routerLinkActive="active" (click)="toggleNav()">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.span }}</span>
+        </button>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

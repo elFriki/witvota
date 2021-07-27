@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="modal">
+        <mat-nav-list>
+            <a *ngFor="let tile of tiles" target="_blank" [href]="tile.href" mat-list-item>
+                <span mat-line>{{ tile.text }}</span>
+                <span mat-line><small>{{ tile.desc }}</small></span>
+            </a>
+        </mat-nav-list>
+    </div>
+</div>

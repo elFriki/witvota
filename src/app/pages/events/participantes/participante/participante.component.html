@@ -1,0 +1,133 @@
+<div class="container" [ngStyle]="{'background-image': 'url(' + participanteFB?.imageUrl + ')'}">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="darkorange" type="pacman" [fullScreen]="true">
+        <p style="color: darkorange">{{ loadingText }}</p>
+    </ngx-spinner>
+    <div class="modal">
+        <mat-card>
+            <form (ngSubmit)="guardarParticipante( f )" #f="ngForm">
+                <mat-card-header>
+                    <mat-card-title class="right">{{ participanteFB?.name ? participanteFB?.name : '&nbsp;' }}</mat-card-title>
+                    <mat-card-subtitle class="right">{{ participanteFB?.description ? participanteFB?.description : '&nbsp;' }}</mat-card-subtitle>
+                    <mat-card-subtitle class="right">ID: {{ id }}</mat-card-subtitle>
+                    <mat-icon matSuffix>person</mat-icon>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre del participante</mat-label>
+                        <input matInput name="name" placeholder="El fabuloso participante" required [(ngModel)]="participanteFB.name">
+                        <mat-icon matSuffix>badge</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción del participante</mat-label>
+                        <input matInput name="description" placeholder="de qué va" [(ngModel)]="participanteFB.description">
+                        <mat-icon matSuffix>filter</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Añade una foto del participante</mat-label>
+                        <input matInput name="imageUrl" placeholder="url de la foto" [(ngModel)]="participanteFB.imageUrl">
+                        <mat-icon matSuffix>local_see</mat-icon>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions class="right">
+                    <button mat-stroked-button type="submit" color="primary">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                    <button mat-stroked-button type="button" color="warn" (click)="confirmaBorrado()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-stroked-button type="button" color="warn" (click)="back()">
+                        <mat-icon>west</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </form>
+
+        </mat-card>
+        <!-- button (click)="back()" class="mat-fab-bottom-right flatButton" mat-fab>
+            <mat-icon class="icon">west</mat-icon>
+        </button -->
+    </div>
+</div>
+
+<!-- mat-vertical-stepper #stepper>
+
+    <mat-step [stepControl]="primerFormGroup" errorMessage="Hay que darle un nombre">
+        <form [formGroup]="primerFormGroup">
+            <ng-template matStepLabel>Nombre del participante</ng-template>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre del participante</mat-label>
+                <input #nombre matInput placeholder="Mi favuloso participante" formControlName="nombre" required ([ngModel])="participante.name" [value]="participante.name">
+                <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>
+                    <mat-icon>south</mat-icon>
+                </button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="segundoFormGroup" optional="true">
+        <div>
+            <button mat-button matStepperPrevious>
+                <mat-icon>north</mat-icon>
+            </button>
+        </div>
+        <form [formGroup]="segundoFormGroup">
+            <ng-template matStepLabel>Descríbelo</ng-template>
+            <mat-form-field appearance="outline">
+                <mat-label>Describe al participante</mat-label>
+                <input matInput placeholder="De qué va mi participante" formControlName="segundoCtrl" [ngModel]="participante.description">
+                <mat-icon matSuffix>filter</mat-icon>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>
+                    <mat-icon>south</mat-icon>
+                </button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="septimoFormGroup" optional="true">
+        <div>
+            <button mat-button matStepperPrevious>
+                <mat-icon>north</mat-icon>
+            </button>
+        </div>
+        <form [formGroup]="septimoFormGroup">
+            <ng-template matStepLabel>Foto</ng-template>
+            <mat-form-field appearance="outline">
+                <mat-label>Añade una foto del participante</mat-label>
+                <input matInput placeholder="url de la foto" formControlName="septimoCtrl" [ngModel]="participante.imageUrl">
+                <mat-icon matSuffix>local_see</mat-icon>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>
+                    <mat-icon>south</mat-icon>
+                </button>
+            </div>
+        </form>
+    </mat-step>
+
+
+    <mat-step>
+        <ng-template matStepLabel>Hecho</ng-template>
+        <div>
+            <button mat-button matStepperPrevious>
+                <mat-icon>north</mat-icon>
+            </button>
+        </div>
+        Confirma la creación del participante
+        <div>
+            <button mat-button (click)="guardar()">
+                <mat-icon>done_all</mat-icon>
+                <span>Guardar</span>
+            </button>
+            <button mat-button (click)="resetear()">
+                <mat-icon>restart_alt</mat-icon>
+                <span>Resetea todo</span>
+            </button>
+        </div>
+
+
+    </mat-step>
+</mat-vertical-stepper -->
